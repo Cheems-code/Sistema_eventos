@@ -2,13 +2,30 @@
 
 {% block content %}
     <h1>Lista de Eventos</h1>
-    {% for evento in eventos %}
-        <div>
-            <h2><a href="{% url 'evento_detail' evento.pk %}">{{ evento.titulo }}</a></h2>
-            <p>Fecha: {{ evento.fecha }}</p>
-            <p>Organizador: {{ evento.organizador.username }}</p>
-        </div>
-    {% empty %}
-        <p>No hay eventos disponibles.</p>
-    {% endfor %}
+
+    <p>Total de eventos este mes: <strong>{{ eventos_este_mes }}</strong></p>
+
+    <section>
+        <h2>Usuarios más activos</h2>
+        <ul>
+            {% for usuario in usuarios_mas_activos %}
+                <li>{{ usuario.username }} - <strong>{{ usuario.num_registros }}</strong> registros</li>
+            {% empty %}
+                <li>No hay usuarios activos.</li>
+            {% endfor %}
+        </ul>
+    </section>
+
+    <section>
+        <h2>Eventos</h2>
+        {% for evento in eventos %}
+            <div class="evento">
+                <h3><a href="{% url 'evento_detail' evento.pk %}">{{ evento.titulo }}</a></h3>
+                <p>Fecha: {{ evento.fecha }}</p>
+                <p>Organizador: {{ evento.organizador.username }}</p>
+            </div>
+        {% empty %}
+            <p>No hay eventos disponibles.</p>
+        {% endfor %}
+    </section>
 {% endblock %}

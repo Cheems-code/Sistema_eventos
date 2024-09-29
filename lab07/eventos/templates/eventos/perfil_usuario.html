@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Perfil de {{ user.username }}</h1>
+  <p>Correo electrónico: {{ user.email }}</p>
+  <p>Fecha de creación de la cuenta: {{ user.date_joined }}</p>
+  
+  <h2>Eventos Registrados</h2>
+  <ul>
+    {% for registro in eventos_registrados %}
+      <li>{{ registro.evento.titulo }} - {{ registro.evento.fecha }}</li>
+    {% empty %}
+      <li>No estás registrado en ningún evento.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}
